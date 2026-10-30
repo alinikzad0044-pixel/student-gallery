@@ -84,7 +84,7 @@ function App() {
       return;
     }
 
-    if (username.trim() !== "alavi") {
+    if (username.trim() !== "class1") {
       setMessage("نام کاربری معلم صحیح نیست.");
       return;
     }
