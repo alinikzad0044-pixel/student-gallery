@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import "./TeacherPanel.css";
 import { supabase } from "../lib/supabase";
 
 function TeacherPanel() {
