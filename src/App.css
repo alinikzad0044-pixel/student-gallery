@@ -1,628 +1,154 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap");
-
-:root {
-  font-family: "Vazirmatn", Tahoma, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-}
-
-* {
-  box-sizing: border-box;
-}
+/* =================================
+   FULL SCREEN BACKGROUND
+================================= */
 
 html,
 body,
 #root {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100%;
-}
-
-body {
-  font-family: "Vazirmatn", Tahoma, sans-serif;
-}
-
-button,
-input {
-  font: inherit;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .login-page {
-  min-height: 100vh;
-  width: 100%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 45px;
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  height: 100svh;
+  padding: 35px 5%;
+  overflow-x: hidden;
+
   background-image: url("/school-background.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 }
+
+/* جلوگیری از سفید شدن اطراف عکس */
+
+body {
+  background: #20283e;
+}
+
+/* =================================
+   GLASS BACKGROUND OVERLAY
+================================= */
 
 .background-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
-      90deg,
-      rgba(20, 27, 49, 0.65),
-      rgba(20, 27, 49, 0.47)
-    ),
-    rgba(20, 27, 49, 0.17);
+      110deg,
+      rgba(15, 23, 42, 0.58),
+      rgba(24, 28, 52, 0.32),
+      rgba(15, 23, 42, 0.53)
+    );
 }
 
-.login-container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1150px;
-  min-height: 680px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 35px;
-}
-
-/* معرفی برند در سمت چپ */
-
-.intro-panel {
-  grid-column: 1;
-  color: white;
-  padding: 35px 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.brand-mark {
-  width: 65px;
-  height: 65px;
-  border: 6px solid transparent;
-  border-radius: 17px;
-  background:
-    linear-gradient(transparent, transparent) padding-box,
-    linear-gradient(135deg, #ffd76e, #ed8bb7, #a58af0) border-box;
-  position: relative;
-}
-
-.brand-mark::before,
-.brand-mark::after {
-  content: "";
-  position: absolute;
-  background: white;
-  border-radius: 5px;
-}
-
-.brand-mark::before {
-  width: 30px;
-  height: 5px;
-  left: -7px;
-  bottom: -7px;
-}
-
-.brand-mark::after {
-  width: 5px;
-  height: 30px;
-  left: -7px;
-  bottom: -7px;
-}
-
-.brand-name {
-  font-size: 36px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-
-.brand-caption {
-  margin-top: 15px;
-  margin-right: 2px;
-  padding-right: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.intro-copy {
-  margin-top: 65px;
-}
-
-.intro-copy h1 {
-  font-size: clamp(32px, 3.3vw, 42px);
-  font-weight: 900;
-  line-height: 1.65;
-  margin: 0;
-}
-
-.intro-copy h1 span {
-  color: #ffe3a6;
-}
-
-.intro-copy p {
-  font-size: 16px;
-  line-height: 2.1;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.intro-bottom {
-  margin-top: 55px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.85);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.intro-line {
-  width: 42px;
-  height: 2px;
-  background: #e9b7dc;
-  display: inline-block;
-}
-
-/* کارت ورود سمت راست */
+/* =================================
+   GLASS LOGIN CARD
+================================= */
 
 .login-card {
-  grid-column: 2;
-  width: 100%;
-  max-width: 560px;
-  justify-self: end;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 27px;
+  background: rgba(255, 255, 255, 0.78) !important;
+
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+
+  box-shadow:
+    0 25px 80px rgba(10, 16, 38, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+
   padding: 42px 40px 30px;
-  box-shadow: 0 25px 80px rgba(12, 20, 48, 0.28);
 }
 
-/* تب‌های ورود */
-
-.role-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 32px;
-}
-
-.role-tab {
-  border: 1px solid transparent;
-  min-height: 86px;
-  border-radius: 21px;
-  background: #f6f3f8;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.role-tab:hover {
-  transform: translateY(-2px);
-}
-
-.tab-icon {
-  width: 25px;
-  height: 25px;
-  display: flex;
-}
-
-.tab-icon svg,
-.field-icon svg,
-.password-toggle svg,
-.footer-shield svg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.role-tab.purple {
-  color: #7759aa;
-  background: #f0ebf8;
-}
-
-.role-tab.pink {
-  color: #b45c88;
-  background: #f8edf3;
-}
-
-.role-tab.green {
-  color: #329c8b;
-  background: #eaf5f2;
-}
-
-.role-tab.purple.active {
-  color: white;
-  background: #8064b3;
-  box-shadow: 0 8px 20px rgba(128, 100, 179, 0.25);
-}
-
-.role-tab.pink.active {
-  color: white;
-  background: #d47da4;
-  box-shadow: 0 8px 20px rgba(212, 125, 164, 0.25);
-}
-
-.role-tab.green.active {
-  color: white;
-  background: #53a997;
-  box-shadow: 0 8px 20px rgba(83, 169, 151, 0.25);
-}
-
-/* عنوان فرم */
-
-.card-heading {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.card-heading h2 {
-  color: #272b52;
-  font-size: 23px;
-  font-weight: 900;
-  margin: 0 0 8px;
-}
-
-.card-heading p {
-  color: #858ba8;
-  font-size: 13px;
-  margin: 0;
-  line-height: 2;
-}
-
-/* ورودی‌ها */
-
-.field {
-  margin-bottom: 15px;
-}
+/* شفافیت بیشتر بخش ورودی */
 
 .input-box {
-  height: 70px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border: 1.5px solid #dce0ec;
-  border-radius: 17px;
-  padding: 0 19px;
-  gap: 13px;
-  background: rgba(255, 255, 255, 0.8);
-  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(205, 210, 229, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .input-box:focus-within {
-  border-color: #9781c1;
-  box-shadow: 0 0 0 4px rgba(151, 129, 193, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #9279c1;
+  box-shadow: 0 0 0 4px rgba(146, 121, 193, 0.13);
 }
 
-.input-box input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #30334f;
-  font-size: 14px;
+/* تب‌های شیشه‌ای */
+
+.role-tabs {
+  background: rgba(240, 239, 247, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.input-box input::placeholder {
-  color: #9298b1;
+.role-tab {
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.field-icon {
-  width: 21px;
-  height: 21px;
-  flex-shrink: 0;
-  color: #657295;
-  display: flex;
+/* =================================
+   BEAUTIFUL PERSIAN TYPOGRAPHY
+================================= */
+
+.login-page,
+.login-page * {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
 }
 
-.password-toggle {
-  width: 22px;
-  height: 22px;
-  border: none;
-  background: transparent;
-  color: #657295;
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
+.brand-name {
+  font-weight: 900;
+  letter-spacing: -1.5px;
 }
 
-/* تنظیمات فرم */
-
-.form-options {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 23px 0 29px;
-  flex-wrap: wrap;
+.intro-copy h1 {
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.8;
 }
 
-.remember-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #777e9d;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.remember-option input {
-  width: 17px;
-  height: 17px;
-  accent-color: #8064b3;
-  cursor: pointer;
-}
-
-.forgot-link {
-  color: #8064b3;
-  border: 0;
-  background: none;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.forgot-link:hover {
-  text-decoration: underline;
-}
-
-/* دکمه ورود */
-
-.submit-button {
-  height: 61px;
-  width: 100%;
-  border: 0;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  color: white;
-  font-size: 15px;
+.card-heading h2 {
   font-weight: 800;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  letter-spacing: -0.5px;
 }
 
-.submit-button:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.06);
-}
-
-.submit-button.purple {
-  background: linear-gradient(110deg, #8064b3, #8064b3);
-  box-shadow: 0 9px 22px rgba(128, 100, 179, 0.25);
-}
-
-.submit-button.pink {
-  background: linear-gradient(110deg, #d47da4, #bd6b96);
-  box-shadow: 0 9px 22px rgba(212, 125, 164, 0.25);
-}
-
-.submit-button.green {
-  background: linear-gradient(110deg, #53a997, #399d8b);
-  box-shadow: 0 9px 22px rgba(83, 169, 151, 0.25);
-}
-
-.submit-arrow {
-  font-size: 21px;
-  line-height: 1;
-}
-
-.form-message {
-  margin-top: 15px;
-  padding: 12px 15px;
-  border-radius: 12px;
-  background: #fff5e9;
-  border: 1px solid #f1dfc5;
-  color: #86633d;
-  font-size: 12px;
-  line-height: 2;
-}
-
-/* پایین کارت */
-
+.card-heading p,
+.input-box input,
+.form-options,
+.submit-button,
 .card-footer {
-  border-top: 1px solid #e7e9f0;
-  margin-top: 39px;
-  padding-top: 21px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 9px;
-  color: #9299b4;
-  font-size: 12px;
+  letter-spacing: -0.2px;
 }
 
-.footer-shield {
-  width: 17px;
-  height: 17px;
-  display: flex;
-}
-
-/* واکنش‌گرایی */
-
-@media (max-width: 900px) {
-  .login-page {
-    padding: 30px 22px;
-  }
-
-  .login-container {
-    gap: 20px;
-  }
-
-  .login-card {
-    padding: 32px 25px 25px;
-  }
-
-  .brand-name {
-    font-size: 30px;
-  }
-
-  .intro-copy h1 {
-    font-size: 32px;
-  }
-
-  .intro-copy p {
-    font-size: 14px;
-  }
-}
+/* =================================
+   MOBILE FULL SCREEN
+================================= */
 
 @media (max-width: 680px) {
   .login-page {
-    padding: 25px 15px;
+    height: auto;
     min-height: 100vh;
+    min-height: 100svh;
+    padding: 25px 15px;
     background-position: center;
-  }
-
-  .background-overlay {
-    background: rgba(22, 29, 51, 0.63);
-  }
-
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    min-height: auto;
-  }
-
-  .intro-panel {
-    padding: 5px 5px 12px;
-    align-items: center;
-    text-align: center;
-  }
-
-  .brand {
-    justify-content: center;
-  }
-
-  .brand-mark {
-    width: 45px;
-    height: 45px;
-    border-width: 4px;
-  }
-
-  .brand-name {
-    font-size: 26px;
-  }
-
-  .brand-caption {
-    font-size: 11px;
-    margin-top: 9px;
-  }
-
-  .intro-copy {
-    margin-top: 18px;
-  }
-
-  .intro-copy h1 {
-    font-size: 23px;
-    line-height: 1.7;
-  }
-
-  .intro-copy p {
-    font-size: 12px;
-    line-height: 1.9;
-    margin: 8px 0 0;
-  }
-
-  .intro-bottom {
-    display: none;
+    background-attachment: scroll;
   }
 
   .login-card {
-    width: 100%;
-    max-width: 470px;
+    background: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(22px) saturate(145%);
+    -webkit-backdrop-filter: blur(22px) saturate(145%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 60px rgba(10, 16, 38, 0.25);
     padding: 24px 19px 20px;
-    border-radius: 23px;
-  }
-
-  .role-tabs {
-    gap: 6px;
-    margin-bottom: 25px;
-  }
-
-  .role-tab {
-    min-height: 72px;
-    font-size: 12px;
-    border-radius: 15px;
-  }
-
-  .tab-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .card-heading {
-    margin-bottom: 23px;
-  }
-
-  .card-heading h2 {
-    font-size: 20px;
-  }
-
-  .card-heading p {
-    font-size: 11px;
-  }
-
-  .input-box {
-    height: 58px;
-    border-radius: 14px;
-  }
-
-  .form-options {
-    margin: 17px 0 22px;
-  }
-
-  .remember-option,
-  .forgot-link {
-    font-size: 10px;
-  }
-
-  .submit-button {
-    height: 55px;
-    font-size: 13px;
-  }
-
-  .card-footer {
-    margin-top: 26px;
-    padding-top: 17px;
-    font-size: 10px;
-  }
-}
-
-@media (max-width: 360px) {
-  .login-card {
-    padding: 20px 14px;
-  }
-
-  .role-tab {
-    font-size: 11px;
-  }
-
-  .form-options {
-    align-items: flex-start;
-    flex-direction: column;
   }
 }
