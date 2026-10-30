@@ -3,236 +3,200 @@ import { useState } from "react";
 import "./App.css";
 
 const roles = [
-  { id: "admin", title: "مدیریت", color: "purple" },
-  { id: "teacher", title: "معلم", color: "pink" },
-  { id: "parent", title: "والدین", color: "green" },
+  {
+    id: "admin",
+    title: "مدیریت",
+    subtitle: "ورود مدیر سامانه",
+    color: "purple",
+    description: "مدیریت و نظارت بر محتوای مدرسه",
+  },
+  {
+    id: "teacher",
+    title: "معلم",
+    subtitle: "ورود کادر آموزشی",
+    color: "pink",
+    description: "بارگذاری و مدیریت تصاویر دانش‌آموزان",
+  },
+  {
+    id: "parent",
+    title: "والدین",
+    subtitle: "ورود اولیای دانش‌آموزان",
+    color: "green",
+    description: "مشاهده تصاویر تأییدشده فرزندتان",
+  },
 ];
 
-function ShieldIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2 20 5v6c0 5.2-3.4 9-8 11-4.6-2-8-5.8-8-11V5l8-3Z" />
-      <path d="m8.5 12 2.2 2.2 4.8-5" />
-    </svg>
-  );
-}
+function RoleIcon({ role }) {
+  if (role === "admin") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3 19 6v5c0 4.5-2.8 8-7 10-4.2-2-7-5.5-7-10V6l7-3Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    );
+  }
 
-function UserIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21c.5-4.2 3.3-6.5 8-6.5s7.5 2.3 8 6.5" />
-    </svg>
-  );
-}
+  if (role === "teacher") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 9.5 12 5l9 4.5-9 4.5-9-4.5Z" />
+        <path d="M7 12v4c3 2.5 7 2.5 10 0v-4" />
+        <path d="M21 10v6" />
+      </svg>
+    );
+  }
 
-function UsersIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="9" cy="8" r="3.5" />
-      <path d="M2.5 20c.4-3.8 2.6-5.8 6.5-5.8s6.1 2 6.5 5.8" />
-      <path d="M16 5.2a3.5 3.5 0 0 1 0 6.7M17 14.5c2.8.5 4.2 2.3 4.5 5" />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="6" y="2" width="12" height="20" rx="2" />
-      <path d="M10 18h4" />
-    </svg>
-  );
-}
-
-function LockIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="4" y="10" width="16" height="12" rx="2" />
-      <path d="M8 10V7a4 4 0 1 1 8 0v3" />
-      <circle cx="12" cy="16" r="1" />
-    </svg>
-  );
-}
-
-function EyeIcon({ hidden }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      {hidden ? (
-        <>
-          <path d="M3 3l18 18" />
-          <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
-          <path d="M9.9 5.2A11 11 0 0 1 12 5c5.5 0 9 7 9 7a15 15 0 0 1-3.2 4.1" />
-          <path d="M6.2 6.2C3.9 7.8 3 12 3 12s3.5 7 9 7c1 0 2-.2 2.8-.5" />
-        </>
-      ) : (
-        <>
-          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-          <circle cx="12" cy="12" r="3" />
-        </>
-      )}
+      <path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20" />
+      <circle cx="9.5" cy="7" r="3.5" />
+      <path d="M17 11a3.5 3.5 0 1 0-1-6.8M17 14.5a4 4 0 0 1 4 4V20" />
     </svg>
   );
 }
 
 function App() {
-  const [role, setRole] = useState("admin");
-  const [mobile, setMobile] = useState("");
+  const [activeRole, setActiveRole] = useState("admin");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [remember, setRemember] = useState(false);
   const [message, setMessage] = useState("");
 
-  const selectedRole = roles.find((item) => item.id === role);
+  const selectedRole = roles.find((role) => role.id === activeRole);
 
-  function handleLogin(event) {
+  function handleSubmit(event) {
     event.preventDefault();
+
+    if (!username.trim() || !password.trim()) {
+      setMessage("لطفاً نام کاربری و رمز عبور را وارد کنید.");
+      return;
+    }
+
     setMessage(
-      "سامانه ورود هنوز به سیستم احراز هویت متصل نشده است. در مرحله بعد ورود امن کاربران را راه‌اندازی می‌کنیم."
+      "صفحه ورود نمایشی است؛ برای ورود واقعی باید احراز هویت سامانه متصل شود."
     );
   }
 
-  function changeRole(nextRole) {
-    setRole(nextRole);
+  function changeRole(role) {
+    setActiveRole(role);
     setMessage("");
   }
 
   return (
-    <main className="login-page" dir="rtl">
+    <main className={`login-page theme-${activeRole}`}>
+      <div className="background-image" />
       <div className="background-overlay" />
+      <div className="ambient ambient-one" />
+      <div className="ambient ambient-two" />
+      <div className="ambient ambient-three" />
 
       <div className="login-container">
-        <section className="intro-panel">
-          <div className="brand">
-            <div className="brand-mark">
-              <span />
-            </div>
-            <div className="brand-name">قاب مدرسه</div>
+        <header className="brand-header">
+          <div className="brand-mark">
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M7 20 24 8l17 12v20H7V20Z" />
+              <path d="M17 40V25h14v15M19 17h10M24 12v10" />
+            </svg>
           </div>
-
-          <div className="brand-caption">
-            سامانه اشتراک عکس و خاطرات مدرسه
+          <div className="brand-copy">
+            <span className="brand-name">قاب مدرسه</span>
+            <span className="brand-caption">خاطرات ماندگار، در قاب امن مدرسه</span>
           </div>
-
-          <div className="intro-copy">
-            <h1>
-              خاطرات شیرین،
-              <br />
-              <span>همیشه ماندگار</span>
-            </h1>
-
-            <p>
-              اینجا لحظه‌های قشنگ مدرسه،
-              <br />
-              در قاب عکس‌ها برای همیشه ثبت می‌شوند.
-            </p>
-          </div>
-
-          <div className="intro-bottom">
-            <span className="intro-line" />
-            <span>قاب مدرسه؛ همراه لحظه‌های زیبای کودکی</span>
-          </div>
-        </section>
+        </header>
 
         <section className="login-card">
-          <div className="role-tabs" role="tablist" aria-label="انتخاب نوع کاربر">
-            {roles.map((item) => (
+          <div className="card-top-line" />
+
+          <div className="card-heading">
+            <span className="eyebrow">SCHOOL PHOTO GALLERY</span>
+            <h1>به قاب مدرسه خوش آمدید</h1>
+            <p>برای ورود، نقش کاربری خود را انتخاب کنید</p>
+          </div>
+
+          <div className="role-tabs" role="tablist" aria-label="انتخاب نقش کاربری">
+            {roles.map((role) => (
               <button
-                key={item.id}
+                key={role.id}
                 type="button"
                 role="tab"
-                aria-selected={role === item.id}
-                className={`role-tab ${item.color} ${
-                  role === item.id ? "active" : ""
-                }`}
-                onClick={() => changeRole(item.id)}
+                aria-selected={activeRole === role.id}
+                className={`role-tab ${activeRole === role.id ? "active" : ""} role-${role.id}`}
+                onClick={() => changeRole(role.id)}
               >
-                <span className="tab-icon">
-                  {item.id === "admin" && <ShieldIcon />}
-                  {item.id === "teacher" && <UserIcon />}
-                  {item.id === "parent" && <UsersIcon />}
+                <span className="role-icon">
+                  <RoleIcon role={role.id} />
                 </span>
-                <span>{item.title}</span>
+                <span>{role.title}</span>
               </button>
             ))}
           </div>
 
-          <div className="card-heading">
-            <h2>ورود به پنل {selectedRole.title}</h2>
-            <p>لطفاً اطلاعات حساب کاربری خود را وارد کنید.</p>
+          <div className="selected-role">
+            <div className="selected-role-icon">
+              <RoleIcon role={activeRole} />
+            </div>
+            <div>
+              <strong>{selectedRole.subtitle}</strong>
+              <span>{selectedRole.description}</span>
+            </div>
           </div>
 
-          <form onSubmit={handleLogin}>
-            <div className="field">
-              <div className="input-box">
-                <input
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="username"
-                  placeholder="شماره موبایل یا نام کاربری"
-                  value={mobile}
-                  onChange={(event) => setMobile(event.target.value)}
-                  required
-                  aria-label="شماره موبایل یا نام کاربری"
-                />
-                <span className="field-icon">
-                  <PhoneIcon />
-                </span>
-              </div>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <label htmlFor="username">نام کاربری</label>
+            <div className="input-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+              </svg>
+              <input
+                id="username"
+                type="text"
+                placeholder="نام کاربری خود را وارد کنید"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete="username"
+              />
             </div>
 
-            <div className="field">
-              <div className="input-box">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  placeholder="رمز عبور"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required
-                  aria-label="رمز عبور"
-                />
-                <span className="field-icon">
-                  <LockIcon />
-                </span>
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "مخفی کردن رمز" : "نمایش رمز"}
-                >
-                  <EyeIcon hidden={!showPassword} />
-                </button>
-              </div>
-            </div>
-
-            <div className="form-options">
-              <label className="remember-option">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(event) => setRemember(event.target.checked)}
-                />
-                <span>مرا به خاطر بسپار</span>
-              </label>
-
+            <label htmlFor="password">رمز عبور</label>
+            <div className="input-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
+              </svg>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="رمز عبور خود را وارد کنید"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+              />
               <button
+                className="password-toggle"
                 type="button"
-                className="forgot-link"
-                onClick={() =>
-                  setMessage("بازیابی رمز عبور پس از اتصال سامانه فعال می‌شود.")
-                }
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "مخفی کردن رمز عبور" : "نمایش رمز عبور"}
               >
-                فراموشی رمز عبور؟
+                {showPassword ? (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 3 21 21M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+                    <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5.5 0 9 7 9 7a15 15 0 0 1-3.1 3.8M6.2 6.2C3.9 7.8 3 12 3 12s3.5 7 9 7c1.1 0 2.1-.2 3-.6" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                )}
               </button>
             </div>
 
-            <button
-              type="submit"
-              className={`submit-button ${selectedRole.color}`}
-            >
-              <span>ورود به پنل {selectedRole.title}</span>
-              <span className="submit-arrow">←</span>
+            <button className="submit-button" type="submit">
+              <span>ورود به سامانه</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5m7-7-7 7 7 7" />
+              </svg>
             </button>
 
             {message && (
@@ -243,12 +207,21 @@ function App() {
           </form>
 
           <div className="card-footer">
-            <span className="footer-shield">
-              <ShieldIcon />
+            <span className="footer-lock">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
             </span>
-            <span>ورود امن به دنیای خاطرات مدرسه</span>
+            <span>حریم خصوصی تصاویر شما برای ما اهمیت دارد</span>
           </div>
         </section>
+
+        <footer className="page-footer">
+          <span>قاب مدرسه</span>
+          <i />
+          <span>سامانه امن اشتراک تصاویر مدرسه</span>
+        </footer>
       </div>
     </main>
   );
