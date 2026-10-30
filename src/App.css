@@ -1,511 +1,628 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body {
+html,
+body,
+#root {
   margin: 0;
-  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  min-width: 320px;
+  min-height: 100%;
 }
 
-button, input {
-  font-family: inherit;
+body {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
 }
 
 .login-page {
   min-height: 100vh;
-  background: #fffaf3;
-  padding: 35px 7%;
+  width: 100%;
   position: relative;
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 45px;
+  overflow: hidden;
+  background-image: url("/school-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.login-layout {
-  width: 100%;
-  max-width: 1150px;
-  min-height: 690px;
-  background: white;
-  border-radius: 35px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  box-shadow: 0 20px 70px rgba(100, 77, 110, 0.10);
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20, 27, 49, 0.65),
+      rgba(20, 27, 49, 0.47)
+    ),
+    rgba(20, 27, 49, 0.17);
+}
+
+.login-container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1150px;
+  min-height: 680px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 35px;
 }
 
-/* بخش معرفی */
+/* معرفی برند در سمت چپ */
 
-.welcome-section {
-  background: linear-gradient(145deg, #eee7ff, #fce7ef 60%, #fff0df);
-  padding: 40px;
+.intro-panel {
+  grid-column: 1;
+  color: white;
+  padding: 35px 15px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  align-items: flex-start;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 25px;
-  font-weight: 900;
-  color: #65518e;
+  gap: 16px;
 }
 
-.brand-icon {
-  width: 49px;
-  height: 49px;
+.brand-mark {
+  width: 65px;
+  height: 65px;
+  border: 6px solid transparent;
+  border-radius: 17px;
+  background:
+    linear-gradient(transparent, transparent) padding-box,
+    linear-gradient(135deg, #ffd76e, #ed8bb7, #a58af0) border-box;
+  position: relative;
+}
+
+.brand-mark::before,
+.brand-mark::after {
+  content: "";
+  position: absolute;
   background: white;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  box-shadow: 0 5px 20px #a58bb52a;
+  border-radius: 5px;
 }
 
-.welcome-content {
-  margin-top: 65px;
-  position: relative;
-  z-index: 2;
+.brand-mark::before {
+  width: 30px;
+  height: 5px;
+  left: -7px;
+  bottom: -7px;
 }
 
-.welcome-label {
-  background: #ffffffb8;
-  padding: 9px 17px;
-  border-radius: 30px;
-  color: #8069a4;
-  font-size: 13px;
-  font-weight: 700;
+.brand-mark::after {
+  width: 5px;
+  height: 30px;
+  left: -7px;
+  bottom: -7px;
 }
 
-.welcome-content h1 {
-  font-size: clamp(30px, 3.5vw, 43px);
-  line-height: 1.8;
-  color: #4e426d;
-  margin: 24px 0 12px;
+.brand-name {
+  font-size: 36px;
   font-weight: 900;
+  letter-spacing: -1px;
 }
 
-.welcome-content h1 span {
-  color: #d879a1;
-}
-
-.welcome-content p {
-  color: #7e718e;
-  line-height: 2.3;
+.brand-caption {
+  margin-top: 15px;
+  margin-right: 2px;
+  padding-right: 5px;
   font-size: 14px;
-  max-width: 390px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.illustration {
-  height: 230px;
-  margin-top: 30px;
-  position: relative;
-  background: #ffffff70;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.intro-copy {
+  margin-top: 65px;
 }
 
-.sun {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 37px;
-}
-
-.cloud {
-  position: absolute;
-  font-size: 40px;
-  opacity: .9;
-}
-
-.cloud-one {
-  top: 28px;
-  left: 40px;
-}
-
-.cloud-two {
-  top: 90px;
-  right: 70px;
-}
-
-.rainbow {
-  font-size: 100px;
-  position: absolute;
-  top: 28px;
-  left: 50px;
-  opacity: .8;
-}
-
-.kids {
-  font-size: 65px;
-  z-index: 2;
-  margin-top: 75px;
-}
-
-.flower {
-  position: absolute;
-  font-size: 32px;
-}
-
-.flower-one {
-  bottom: 12px;
-  right: 30px;
-}
-
-.flower-two {
-  bottom: 12px;
-  left: 40px;
-}
-
-.flower-three {
-  bottom: 20px;
-  left: 45%;
-}
-
-.welcome-footer {
-  margin-top: auto;
-  padding-top: 25px;
-  color: #806c95;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-/* بخش فرم ورود */
-
-.form-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 45px;
-  background: #fff;
-}
-
-.form-card {
-  width: 100%;
-  max-width: 430px;
-}
-
-.mobile-brand {
-  display: none;
-}
-
-.form-heading {
-  text-align: center;
-}
-
-.heading-icon {
-  width: 70px;
-  height: 70px;
-  background: #fff1f5;
-  border-radius: 23px;
-  margin: 0 auto 15px;
-  display: grid;
-  place-items: center;
-  font-size: 34px;
-}
-
-.form-heading h2 {
-  font-size: 27px;
-  color: #4d4265;
-  margin: 0 0 8px;
+.intro-copy h1 {
+  font-size: clamp(32px, 3.3vw, 42px);
   font-weight: 900;
-}
-
-.form-heading p {
-  color: #9a91a5;
-  font-size: 13px;
-  line-height: 2;
+  line-height: 1.65;
   margin: 0;
 }
 
-/* تب‌ها */
+.intro-copy h1 span {
+  color: #ffe3a6;
+}
+
+.intro-copy p {
+  font-size: 16px;
+  line-height: 2.1;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.intro-bottom {
+  margin-top: 55px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.intro-line {
+  width: 42px;
+  height: 2px;
+  background: #e9b7dc;
+  display: inline-block;
+}
+
+/* کارت ورود سمت راست */
+
+.login-card {
+  grid-column: 2;
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 27px;
+  padding: 42px 40px 30px;
+  box-shadow: 0 25px 80px rgba(12, 20, 48, 0.28);
+}
+
+/* تب‌های ورود */
 
 .role-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  background: #f8f6fa;
-  padding: 7px;
-  border-radius: 17px;
-  margin: 32px 0;
+  gap: 8px;
+  margin-bottom: 32px;
 }
 
 .role-tab {
-  border: none;
-  background: transparent;
-  color: #81778c;
-  padding: 13px 5px;
-  border-radius: 13px;
+  border: 1px solid transparent;
+  min-height: 86px;
+  border-radius: 21px;
+  background: #f6f3f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
-  transition: .25s;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
 }
 
-.role-tab span {
-  display: block;
-  font-size: 22px;
-  margin-bottom: 6px;
+.role-tab:hover {
+  transform: translateY(-2px);
 }
 
-.role-tab.active {
+.tab-icon {
+  width: 25px;
+  height: 25px;
+  display: flex;
+}
+
+.tab-icon svg,
+.field-icon svg,
+.password-toggle svg,
+.footer-shield svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.role-tab.purple {
+  color: #7759aa;
+  background: #f0ebf8;
+}
+
+.role-tab.pink {
+  color: #b45c88;
+  background: #f8edf3;
+}
+
+.role-tab.green {
+  color: #329c8b;
+  background: #eaf5f2;
+}
+
+.role-tab.purple.active {
   color: white;
-  box-shadow: 0 5px 15px #00000012;
+  background: #8064b3;
+  box-shadow: 0 8px 20px rgba(128, 100, 179, 0.25);
 }
 
-.role-tab.active.purple,
-.login-button.purple {
-  background: #8c75bd;
+.role-tab.pink.active {
+  color: white;
+  background: #d47da4;
+  box-shadow: 0 8px 20px rgba(212, 125, 164, 0.25);
 }
 
-.role-tab.active.pink,
-.login-button.pink {
-  background: #dc88a9;
+.role-tab.green.active {
+  color: white;
+  background: #53a997;
+  box-shadow: 0 8px 20px rgba(83, 169, 151, 0.25);
 }
 
-.role-tab.active.green,
-.login-button.green {
-  background: #72b8a0;
+/* عنوان فرم */
+
+.card-heading {
+  text-align: center;
+  margin-bottom: 32px;
 }
 
-/* فیلدها */
+.card-heading h2 {
+  color: #272b52;
+  font-size: 23px;
+  font-weight: 900;
+  margin: 0 0 8px;
+}
 
-.form-card form > label {
-  display: block;
+.card-heading p {
+  color: #858ba8;
   font-size: 13px;
-  font-weight: 700;
-  color: #5e536f;
-  margin: 20px 0 10px;
+  margin: 0;
+  line-height: 2;
 }
 
-.input-wrapper {
-  height: 55px;
-  border: 1px solid #ece8f0;
-  border-radius: 14px;
+/* ورودی‌ها */
+
+.field {
+  margin-bottom: 15px;
+}
+
+.input-box {
+  height: 70px;
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 15px;
-  background: #fdfcff;
-  transition: .2s;
+  border: 1.5px solid #dce0ec;
+  border-radius: 17px;
+  padding: 0 19px;
+  gap: 13px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
 }
 
-.input-wrapper:focus-within {
-  border-color: #b29bd4;
-  box-shadow: 0 0 0 3px #eee8f8;
+.input-box:focus-within {
+  border-color: #9781c1;
+  box-shadow: 0 0 0 4px rgba(151, 129, 193, 0.1);
 }
 
-.input-wrapper > span {
-  font-size: 19px;
-}
-
-.input-wrapper input {
-  border: none;
-  outline: none;
-  background: transparent;
-  flex: 1;
+.input-box input {
+  width: 100%;
   min-width: 0;
-  font-size: 13px;
-  color: #514661;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #30334f;
+  font-size: 14px;
 }
 
-.input-wrapper input::placeholder {
-  color: #b5adbd;
+.input-box input::placeholder {
+  color: #9298b1;
 }
 
-.show-password {
+.field-icon {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  color: #657295;
+  display: flex;
+}
+
+.password-toggle {
+  width: 22px;
+  height: 22px;
   border: none;
-  background: none;
+  background: transparent;
+  color: #657295;
   cursor: pointer;
-  font-size: 17px;
+  padding: 0;
+  flex-shrink: 0;
 }
+
+/* تنظیمات فرم */
 
 .form-options {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin-top: 17px;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 23px 0 29px;
   flex-wrap: wrap;
 }
 
-.remember {
-  color: #8d8398;
-  font-size: 11px;
+.remember-option {
   display: flex;
   align-items: center;
-  gap: 5px;
-}
-
-.remember input {
-  accent-color: #947cc2;
-}
-
-.forgot-button {
-  border: none;
-  background: none;
-  color: #987fbb;
-  font-size: 11px;
+  gap: 8px;
+  color: #777e9d;
+  font-size: 12px;
   cursor: pointer;
 }
 
-.login-button {
-  margin-top: 27px;
-  height: 57px;
+.remember-option input {
+  width: 17px;
+  height: 17px;
+  accent-color: #8064b3;
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: #8064b3;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* دکمه ورود */
+
+.submit-button {
+  height: 61px;
   width: 100%;
-  border: none;
-  border-radius: 15px;
+  border: 0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
   color: white;
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 8px 18px #8c75bd30;
-  transition: .25s;
+  transition: all 0.25s ease;
 }
 
-.login-button:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.04);
+.submit-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
 }
 
-.login-button span {
-  margin-right: 8px;
-  font-size: 20px;
+.submit-button.purple {
+  background: linear-gradient(110deg, #8064b3, #8064b3);
+  box-shadow: 0 9px 22px rgba(128, 100, 179, 0.25);
 }
 
-.login-message {
+.submit-button.pink {
+  background: linear-gradient(110deg, #d47da4, #bd6b96);
+  box-shadow: 0 9px 22px rgba(212, 125, 164, 0.25);
+}
+
+.submit-button.green {
+  background: linear-gradient(110deg, #53a997, #399d8b);
+  box-shadow: 0 9px 22px rgba(83, 169, 151, 0.25);
+}
+
+.submit-arrow {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.form-message {
   margin-top: 15px;
-  padding: 12px;
+  padding: 12px 15px;
   border-radius: 12px;
-  background: #fff5e7;
-  color: #8c6742;
+  background: #fff5e9;
+  border: 1px solid #f1dfc5;
+  color: #86633d;
   font-size: 12px;
   line-height: 2;
 }
 
-.form-bottom {
-  margin-top: 35px;
-  color: #a49aaa;
-  font-size: 11px;
-  text-align: center;
+/* پایین کارت */
+
+.card-footer {
+  border-top: 1px solid #e7e9f0;
+  margin-top: 39px;
+  padding-top: 21px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  color: #9299b4;
+  font-size: 12px;
 }
 
-/* تزئینات پس زمینه */
-
-.decoration {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
+.footer-shield {
+  width: 17px;
+  height: 17px;
+  display: flex;
 }
 
-.decoration-one {
-  top: 7%;
-  right: 5%;
-  color: #e7b9d0;
-  font-size: 45px;
-}
+/* واکنش‌گرایی */
 
-.decoration-two {
-  bottom: 7%;
-  right: 3%;
-  font-size: 65px;
-  opacity: .4;
-}
-
-.decoration-three {
-  top: 10%;
-  left: 5%;
-  font-size: 43px;
-}
-
-.decoration-four {
-  bottom: 8%;
-  left: 6%;
-  font-size: 35px;
-  color: #eacb83;
-}
-
-.page-footer {
-  padding-top: 22px;
-  color: #a79bab;
-  font-size: 11px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-/* نمایش موبایل */
-
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .login-page {
-    padding: 18px 12px;
+    padding: 30px 22px;
   }
 
-  .login-layout {
-    grid-template-columns: 1fr;
+  .login-container {
+    gap: 20px;
+  }
+
+  .login-card {
+    padding: 32px 25px 25px;
+  }
+
+  .brand-name {
+    font-size: 30px;
+  }
+
+  .intro-copy h1 {
+    font-size: 32px;
+  }
+
+  .intro-copy p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .login-page {
+    padding: 25px 15px;
+    min-height: 100vh;
+    background-position: center;
+  }
+
+  .background-overlay {
+    background: rgba(22, 29, 51, 0.63);
+  }
+
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
     min-height: auto;
-    border-radius: 25px;
-    max-width: 500px;
   }
 
-  .welcome-section {
+  .intro-panel {
+    padding: 5px 5px 12px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .brand-mark {
+    width: 45px;
+    height: 45px;
+    border-width: 4px;
+  }
+
+  .brand-name {
+    font-size: 26px;
+  }
+
+  .brand-caption {
+    font-size: 11px;
+    margin-top: 9px;
+  }
+
+  .intro-copy {
+    margin-top: 18px;
+  }
+
+  .intro-copy h1 {
+    font-size: 23px;
+    line-height: 1.7;
+  }
+
+  .intro-copy p {
+    font-size: 12px;
+    line-height: 1.9;
+    margin: 8px 0 0;
+  }
+
+  .intro-bottom {
     display: none;
   }
 
-  .form-section {
-    padding: 35px 22px;
-  }
-
-  .mobile-brand {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 9px;
-    color: #725a9d;
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 30px;
-  }
-
-  .mobile-brand:first-letter {
-    font-size: 25px;
-  }
-
-  .form-heading h2 {
-    font-size: 24px;
+  .login-card {
+    width: 100%;
+    max-width: 470px;
+    padding: 24px 19px 20px;
+    border-radius: 23px;
   }
 
   .role-tabs {
-    margin: 25px 0;
+    gap: 6px;
+    margin-bottom: 25px;
   }
 
-  .page-footer {
-    line-height: 2;
+  .role-tab {
+    min-height: 72px;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+
+  .tab-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .card-heading {
+    margin-bottom: 23px;
+  }
+
+  .card-heading h2 {
+    font-size: 20px;
+  }
+
+  .card-heading p {
+    font-size: 11px;
+  }
+
+  .input-box {
+    height: 58px;
+    border-radius: 14px;
+  }
+
+  .form-options {
+    margin: 17px 0 22px;
+  }
+
+  .remember-option,
+  .forgot-link {
+    font-size: 10px;
+  }
+
+  .submit-button {
+    height: 55px;
+    font-size: 13px;
+  }
+
+  .card-footer {
+    margin-top: 26px;
+    padding-top: 17px;
+    font-size: 10px;
   }
 }
 
 @media (max-width: 360px) {
-  .form-section {
-    padding: 25px 15px;
+  .login-card {
+    padding: 20px 14px;
   }
 
   .role-tab {
     font-size: 11px;
+  }
+
+  .form-options {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
